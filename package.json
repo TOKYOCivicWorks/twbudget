@@ -1,12 +1,12 @@
 {
-  "author": "g0v.tw",
-  "name": "g0v.tw",
-  "description": "g0v.tw",
+  "author": "TOKYO CivicWorks",
+  "name": "jpbudget",
+  "description": "Japan National Budget Visualization Site",
   "version": "0.0.1",
-  "homepage": "https://github.com/g0v/twbudget",
+  "homepage": "http://budget.civic-works.tokyo",
   "repository": {
     "type": "git",
-    "url": "https://github.com/g0v/twbudget"
+    "url": "https://github.com/TOKYOCivicWorks/jpbudget"
   },
   "engines": {
     "node": "4.4.x",
@@ -17,16 +17,21 @@
     "start": "node server/app.js"
   },
   "dependencies": {
-    "zappajs": "0.6.x",
-    "mongoose": "3.2.x",
-    "passport": "0.1.x",
+    "basic-auth": "^2.0.1",
     "bcrypt": "*",
     "cookie-sessions": "git://github.com/clkao/cookie-sessions.git",
-    "passport-local": "0.1.x",
+    "crypto-js": "^4.0.0",
+    "jade": "0.27.x",
+    "livescript": "^1.6.0",
+    "mongoose": "3.2.x",
+    "node-fetch": "^2.6.0",
+    "passport": "0.1.x",
     "passport-facebook": "0.1.x",
     "passport-github": "0.1.x",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "0.1.x",
     "passport-twitter": "0.1.x",
-    "jade": "0.27.x"
+    "zappajs": "0.6.x"
   },
   "devDependencies": {
     "LiveScript": "1.1.1",

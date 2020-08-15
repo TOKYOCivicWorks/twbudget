@@ -1,5 +1,5 @@
 CurrencyData = [
-  ["", "元", 1],
+  ["", "円", 1],
   ["份","營養午餐",25],
   ["份","營養午餐(回扣)",30],
   ["人的","年薪",308000],
@@ -26,7 +26,7 @@ CurrencyConvert = (v, idx, full) ->
   if v >= 1000 and v < 10000
     v = parseInt(v / 1000) + "千"
   else if v >= 10000 and v < 100000000
-    v = parseInt(v / 10000) + "萬"
+    v = parseInt(v / 10000) + "万"
   else if v >= 100000000 and v < 1000000000000
     v = parseInt(v / 100000000) + "億"
   else v = parseInt(v / 1000000000000) + "兆"  if v >= 1000000000000

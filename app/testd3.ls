@@ -1,19 +1,20 @@
 mapforyear = (year, cb) ->
-    json <- d3.csv "/data/tw#{year}ap.csv"
+    json <- d3.csv "/data/jp#{year}.csv"
+    log.debug("json.length: " + json.length + ", year = " + year)
     cb {[code, entry] for {code}:entry in json}
 
 dataforyear = (year, cb) ->
-    json <- d3.csv "/data/tw#{year}ap.csv"
+    json <- d3.csv "/data/jp#{year}.csv"
     json = d3.nest!
         .key -> it.cat
         .key -> it.depname
         .map json
     cb {key: \root, values: json}
 
-dataOverYears = (y2018, y2019) ->
-    for code, entry of y2019
-        entry.byYear = { 2019: +entry.amount, 2018: +y2018[code]?amount }
-        entry.change = (entry.byYear.2019 - entry.byYear.2018) / entry.byYear.2018 if entry.byYear.2018
+dataOverYears = (y2019, y2020) ->
+    for code, entry of y2020
+        entry.byYear = { 2020: +entry.amount, 2019: +y2019[code]?amount }
+        entry.change = (entry.byYear.2020 - entry.byYear.2019) / entry.byYear.2019 if entry.byYear.2019
         entry.amount = 0 if entry.amount is \NaN
         entry
 
@@ -22,29 +23,22 @@ init_year_data = (cb) ->
     return cb by_year if by_year
 
     by_year := {}
-    by_year.2007 <- mapforyear 2007
-    by_year.2008 <- mapforyear 2008
-    by_year.2009 <- mapforyear 2009
-    by_year.2010 <- mapforyear 2010
-    by_year.2011 <- mapforyear 2011
-    by_year.2012 <- mapforyear 2012
-    by_year.2013 <- mapforyear 2013
-    by_year.2014 <- mapforyear 2014
     by_year.2015 <- mapforyear 2015
     by_year.2016 <- mapforyear 2016
     by_year.2017 <- mapforyear 2017
     by_year.2018 <- mapforyear 2018
     by_year.2019 <- mapforyear 2019
+    by_year.2020 <- mapforyear 2020
 
     cb by_year
 
 bar_chart = (id,mode) ->
     by_year <- init_year_data!
 
-    data = [{year, amount: +((by_year[year] && by_year[year][id])?amount ? 0)} for year in [2007 to 2019]]
-    margin = {top: 10, right: 30, bottom: 20, left: 90}
+    data = [{year, amount: +((by_year[year] && by_year[year][id])?amount ? 0)} for year in [2015 to 2020]]
+    margin = {top: 60, right: 30, bottom: 20, left: 90}
     width = 360 - margin.left - margin.right
-    height = 140 - margin.top - margin.bottom
+    height = 210 - margin.top - margin.bottom
 
     x = d3.scale.ordinal().rangeRoundBands([0, width], 0.1)
 
@@ -77,7 +71,7 @@ bar_chart = (id,mode) ->
         .attr("y", -86)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
-        .text("金額(百萬元)");
+        .text("金額(百万円)");
 
     svg.selectAll(\.bar)data(data)
         .enter!append \rect
@@ -97,10 +91,13 @@ test_bubble = ->
       ..start!
       ..display_group_all!
 
-  y2018 <- mapforyear 2018
   y2019 <- mapforyear 2019
-  data = dataOverYears y2018, y2019
+  y2020 <- mapforyear 2020
+  log.debug("test_bubble y2019.length: " Object.keys(y2019).length)
+  log.debug("test_bubble y2020.length: " Object.keys(y2020).length)
+  data = dataOverYears y2019, y2020
   data .= sort (a, b) -> b.amount - a.amount
+  log.debug("test_bubble data.length: " data.length)
   #data .= slice 0, 600
   render_vis data
   $('.btn.bycat')click -> chart.display_by_attr \cat
@@ -129,9 +126,9 @@ testd3 = ->
         .style \width  width + \px
         .style \height height + \px
 
-    y2018 <- mapforyear 2018
     y2019 <- mapforyear 2019
-    data = dataOverYears y2018, y2019
+    y2020 <- mapforyear 2020
+    data = dataOverYears y2019, y2020
     json = d3.nest!
         .key -> it.cat
         .key -> it.depname
@@ -146,15 +143,15 @@ testd3 = ->
         .call cell
         .text -> if it.values then null else it.name
 
-    d3.select(\#y2019).on \click ->
+    d3.select(\#y2020).on \click ->
         div.selectAll("div")
-            .data treemap.value -> it.byYear?2019
+            .data treemap.value -> it.byYear?2020
         .transition()
             .duration(1500)
             .call(cell)
-    d3.select(\#y2018).on \click ->
+    d3.select(\#y2019).on \click ->
         div.selectAll("div")
-            .data treemap.value -> it.byYear?2018
+            .data treemap.value -> it.byYear?2019
         .transition()
             .duration(1500)
             .call(cell)

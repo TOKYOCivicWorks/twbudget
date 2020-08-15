@@ -1,6 +1,6 @@
 {
-  "name": "twbudget",
-  "name_zh": "中央政府總預算",
+  "name": "jpbudget",
+  "name_zh": "日本の国の予算可視化",
   "status": "Alpha",
   "tags": [
     "angularjs",
@@ -9,19 +9,16 @@
     "bootstrap"
   ],
   "licenses": "MIT",
-  "author": "clkao",
+  "author": "TOKYO CivicWorks",
   "contributors": [
-    "zbryikt",
-    "CA",
-    "jeffhung",
-    "ipa"
+    "tokutsu"
   ],
-  "description": "Taiwan Central Government Budget project supercharges citizens with the power of visualization and social network to supervise government spending.  Provide different perspectives of budget data like historical trend, cross-department comparison, public opinion and  component breakdown of tax by government spending with interactive treemap, bubble chart and feedback mechanism.",
-  "description_zh": "中央政府總預算視覺化專案利用資料視覺化與社群網路的力量提升公民對政府預算規畫的監督能力。此專案利用各種互動式的視覺化技>巧 ( 包含樹狀圖 ( treemap ) 、泡泡圖 (Bubble Chart ) 搭配民眾反饋機制來展示預算數字的各種面向，例如歷史趨勢、跨部門比較、公眾意見與稅金的拆解。",
-  "homepage": "http://budget.g0v.tw/",
+  "description": "Japan National Budget Visualization Site",
+  "description_zh": "日本の国の予算可視化サイト",
+  "homepage": "http://budget.civic-works.tokyo",
   "repository": {
     "type": "git",
-    "url": "https://github.com/g0v/twbudget"
+    "url": "https://github.com/TOKYOCivicWorks/jpbudget"
   },
   "audience": [
     "public"
@@ -32,7 +29,7 @@
   "projects": [
     "budget"
   ],
-  "thumbnail": "https://raw.github.com/g0v/twbudget/master/thumbnail.png",
+  "thumbnail": "https://raw.github.com/TOKYOCivicWorks/jpbudget/master/thumbnail.png",
   "needs": [
     "designer",
     "programmer",

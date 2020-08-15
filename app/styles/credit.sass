@@ -1,0 +1,818 @@
+#credit-info
+    position: absolute
+    top: 0px
+    right: 10px
+
+.credit-body
+    position: absolute
+    top: 50px
+    right: 150px
+    width: 600px
+    padding: 40px
+    background: white
+    opacity: 0.95
+    box-shadow: 1px 1px 3px
+    z-index: 120
+    text-align: left
+    -ms-text-size-adjust: 100%
+    -webkit-text-size-adjust: 100%
+    line-height: 1.5
+    color: #24292e
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji
+    font-size: 16px
+    word-wrap: break-word
+
+.credit-body .octicon
+    display: inline-block
+    fill: currentColor
+    vertical-align: text-bottom
+
+.credit-body .anchor
+    float: left
+    line-height: 1
+    margin-left: -20px
+    padding-right: 4px
+
+.credit-body .anchor:focus
+    outline: none
+
+.credit-body h1 .octicon-link,
+.credit-body h2 .octicon-link,
+.credit-body h3 .octicon-link,
+.credit-body h4 .octicon-link,
+.credit-body h5 .octicon-link,
+.credit-body h6 .octicon-link
+    color: #1b1f23
+    vertical-align: middle
+    visibility: hidden
+
+.credit-body h1:hover .anchor,
+.credit-body h2:hover .anchor,
+.credit-body h3:hover .anchor,
+.credit-body h4:hover .anchor,
+.credit-body h5:hover .anchor,
+.credit-body h6:hover .anchor
+    text-decoration: none
+
+.credit-body h1:hover .anchor .octicon-link,
+.credit-body h2:hover .anchor .octicon-link,
+.credit-body h3:hover .anchor .octicon-link,
+.credit-body h4:hover .anchor .octicon-link,
+.credit-body h5:hover .anchor .octicon-link,
+.credit-body h6:hover .anchor .octicon-link
+    visibility: visible
+
+.credit-body h1:hover .anchor .octicon-link:before,
+.credit-body h2:hover .anchor .octicon-link:before,
+.credit-body h3:hover .anchor .octicon-link:before,
+.credit-body h4:hover .anchor .octicon-link:before,
+.credit-body h5:hover .anchor .octicon-link:before,
+.credit-body h6:hover .anchor .octicon-link:before
+    width: 16px
+    height: 16px
+    content: ' '
+    display: inline-block
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill-rule='evenodd' d='M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z'%3E%3C/path%3E%3C/svg%3E")
+
+.credit-body details
+    display: block
+
+.credit-body summary
+    display: list-item
+
+.credit-body a
+    background-color: initial
+
+.credit-body a:active,
+.credit-body a:hover
+    outline-width: 0
+
+.credit-body strong
+    font-weight: inherit
+    font-weight: bolder
+
+.credit-body h1
+    margin: .67em 0
+
+.credit-body img
+    border-style: none
+
+.credit-body code,
+.credit-body kbd,
+.credit-body pre
+    font-family: monospace,monospace
+    font-size: 1em
+
+.credit-body hr
+    box-sizing: initial
+    height: 0
+    overflow: visible
+
+.credit-body input
+    font: inherit
+    margin: 0
+
+.credit-body input
+    overflow: visible
+
+.credit-body [type=checkbox]
+    box-sizing: border-box
+    padding: 0
+
+.credit-body *
+    box-sizing: border-box
+
+.credit-body input
+    font-family: inherit
+    font-size: inherit
+    line-height: inherit
+
+.credit-body a
+    color: #0366d6
+    text-decoration: none
+
+.credit-body a:hover
+    text-decoration: underline
+
+.credit-body strong
+    font-weight: 600
+
+.credit-body hr
+    height: 0
+    margin: 15px 0
+    overflow: hidden
+    background: transparent
+    border: 0
+    border-bottom: 1px solid #dfe2e5
+
+.credit-body hr:after,
+.credit-body hr:before
+    display: table
+    content: ""
+
+.credit-body hr:after
+    clear: both
+
+.credit-body table
+    border-spacing: 0
+    border-collapse: collapse
+
+.credit-body td,
+.credit-body th
+    padding: 0
+
+.credit-body details summary
+    cursor: pointer
+
+.credit-body kbd
+    display: inline-block
+    padding: 3px 5px
+    font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace
+    line-height: 10px
+    color: #444d56
+    vertical-align: middle
+    background-color: #fafbfc
+    border: 1px solid #d1d5da
+    border-radius: 3px
+    box-shadow: inset 0 -1px 0 #d1d5da
+
+.credit-body h1,
+.credit-body h2,
+.credit-body h3,
+.credit-body h4,
+.credit-body h5,
+.credit-body h6
+    margin-top: 0
+    margin-bottom: 0
+
+.credit-body h1
+    font-size: 20px
+
+.credit-body h1,
+.credit-body h2
+    font-weight: 600
+
+.credit-body h2
+    font-size: 16px
+
+.credit-body h3
+    font-size: 16px
+
+.credit-body h3,
+.credit-body h4
+    font-weight: 600
+
+.credit-body h4
+    font-size: 16px
+
+.credit-body h5
+    font-size: 14px
+
+.credit-body h5,
+.credit-body h6
+    font-weight: 600
+
+.credit-body h6
+    font-size: 12px
+
+.credit-body p
+    margin-top: 0
+    margin-bottom: 10px
+
+.credit-body blockquote
+    margin: 0
+
+.credit-body ol,
+.credit-body ul
+    padding-left: 0
+    margin-top: 0
+    margin-bottom: 0
+
+.credit-body ol ol,
+.credit-body ul ol
+    list-style-type: lower-roman
+
+.credit-body ol ol ol,
+.credit-body ol ul ol,
+.credit-body ul ol ol,
+.credit-body ul ul ol
+    list-style-type: lower-alpha
+
+.credit-body dd
+    margin-left: 0
+
+.credit-body code,
+.credit-body pre
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace
+    font-size: 12px
+
+.credit-body pre
+    margin-top: 0
+    margin-bottom: 0
+
+.credit-body input::-webkit-inner-spin-button,
+.credit-body input::-webkit-outer-spin-button
+    margin: 0
+    -webkit-appearance: none
+    appearance: none
+
+.credit-body :checked+.radio-label
+    position: relative
+    z-index: 1
+    border-color: #0366d6
+
+.credit-body .border
+    border: 1px solid #e1e4e8!important
+
+.credit-body .border-0
+    border: 0!important
+
+.credit-body .border-bottom
+    border-bottom: 1px solid #e1e4e8!important
+
+.credit-body .rounded-1
+    border-radius: 3px!important
+
+.credit-body .bg-white
+    background-color: #fff!important
+
+.credit-body .bg-gray-light
+    background-color: #fafbfc!important
+
+.credit-body .text-gray-light
+    color: #6a737d!important
+
+.credit-body .mb-0
+    margin-bottom: 0!important
+
+.credit-body .my-2
+    margin-top: 8px!important
+    margin-bottom: 8px!important
+
+.credit-body .pl-0
+    padding-left: 0!important
+
+.credit-body .py-0
+    padding-top: 0!important
+    padding-bottom: 0!important
+
+.credit-body .pl-1
+    padding-left: 4px!important
+
+.credit-body .pl-2
+    padding-left: 8px!important
+
+.credit-body .py-2
+    padding-top: 8px!important
+    padding-bottom: 8px!important
+
+.credit-body .pl-3,
+.credit-body .px-3
+    padding-left: 16px!important
+
+.credit-body .px-3
+    padding-right: 16px!important
+
+.credit-body .pl-4
+    padding-left: 24px!important
+
+.credit-body .pl-5
+    padding-left: 32px!important
+
+.credit-body .pl-6
+    padding-left: 40px!important
+
+.credit-body .f6
+    font-size: 12px!important
+
+.credit-body .lh-condensed
+    line-height: 1.25!important
+
+.credit-body .text-bold
+    font-weight: 600!important
+
+.credit-body .pl-c
+    color: #6a737d
+
+.credit-body .pl-c1,
+.credit-body .pl-s .pl-v
+    color: #005cc5
+
+.credit-body .pl-e,
+.credit-body .pl-en
+    color: #6f42c1
+
+.credit-body .pl-s .pl-s1,
+.credit-body .pl-smi
+    color: #24292e
+
+.credit-body .pl-ent
+    color: #22863a
+
+.credit-body .pl-k
+    color: #d73a49
+
+.credit-body .pl-pds,
+.credit-body .pl-s,
+.credit-body .pl-s .pl-pse .pl-s1,
+.credit-body .pl-sr,
+.credit-body .pl-sr .pl-cce,
+.credit-body .pl-sr .pl-sra,
+.credit-body .pl-sr .pl-sre
+    color: #032f62
+
+.credit-body .pl-smw,
+.credit-body .pl-v
+    color: #e36209
+
+.credit-body .pl-bu
+    color: #b31d28
+
+.credit-body .pl-ii
+    color: #fafbfc
+    background-color: #b31d28
+
+.credit-body .pl-c2
+    color: #fafbfc
+    background-color: #d73a49
+
+.credit-body .pl-c2:before
+    content: "^M"
+
+.credit-body .pl-sr .pl-cce
+    font-weight: 700
+    color: #22863a
+
+.credit-body .pl-ml
+    color: #735c0f
+
+.credit-body .pl-mh,
+.credit-body .pl-mh .pl-en,
+.credit-body .pl-ms
+    font-weight: 700
+    color: #005cc5
+
+.credit-body .pl-mi
+    font-style: italic
+    color: #24292e
+
+.credit-body .pl-mb
+    font-weight: 700
+    color: #24292e
+
+.credit-body .pl-md
+    color: #b31d28
+    background-color: #ffeef0
+
+.credit-body .pl-mi1
+    color: #22863a
+    background-color: #f0fff4
+
+.credit-body .pl-mc
+    color: #e36209
+    background-color: #ffebda
+
+.credit-body .pl-mi2
+    color: #f6f8fa
+    background-color: #005cc5
+
+.credit-body .pl-mdr
+    font-weight: 700
+    color: #6f42c1
+
+.credit-body .pl-ba
+    color: #586069
+
+.credit-body .pl-sg
+    color: #959da5
+
+.credit-body .pl-corl
+    text-decoration: underline
+    color: #032f62
+
+.credit-body .mb-0
+    margin-bottom: 0!important
+
+.credit-body .my-2
+    margin-bottom: 8px!important
+
+.credit-body .my-2
+    margin-top: 8px!important
+
+.credit-body .pl-0
+    padding-left: 0!important
+
+.credit-body .py-0
+    padding-top: 0!important
+    padding-bottom: 0!important
+
+.credit-body .pl-1
+    padding-left: 4px!important
+
+.credit-body .pl-2
+    padding-left: 8px!important
+
+.credit-body .py-2
+    padding-top: 8px!important
+    padding-bottom: 8px!important
+
+.credit-body .pl-3
+    padding-left: 16px!important
+
+.credit-body .pl-4
+    padding-left: 24px!important
+
+.credit-body .pl-5
+    padding-left: 32px!important
+
+.credit-body .pl-6
+    padding-left: 40px!important
+
+.credit-body .pl-7
+    padding-left: 48px!important
+
+.credit-body .pl-8
+    padding-left: 64px!important
+
+.credit-body .pl-9
+    padding-left: 80px!important
+
+.credit-body .pl-10
+    padding-left: 96px!important
+
+.credit-body .pl-11
+    padding-left: 112px!important
+
+.credit-body .pl-12
+    padding-left: 128px!important
+
+.credit-body hr
+    border-bottom-color: #eee
+
+.credit-body kbd
+    display: inline-block
+    padding: 3px 5px
+    font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace
+    line-height: 10px
+    color: #444d56
+    vertical-align: middle
+    background-color: #fafbfc
+    border: 1px solid #d1d5da
+    border-radius: 3px
+    box-shadow: inset 0 -1px 0 #d1d5da
+
+.credit-body:after,
+.credit-body:before
+    display: table
+    content: ""
+
+.credit-body:after
+    clear: both
+
+.credit-body>:first-child
+    margin-top: 0!important
+
+.credit-body>:last-child
+    margin-bottom: 0!important
+
+.credit-body a:not([href])
+    color: inherit
+    text-decoration: none
+
+.credit-body blockquote,
+.credit-body details,
+.credit-body dl,
+.credit-body ol,
+.credit-body p,
+.credit-body pre,
+.credit-body table,
+.credit-body ul
+    margin-top: 0
+    margin-bottom: 16px
+
+.credit-body hr
+    height: .25em
+    padding: 0
+    margin: 24px 0
+    background-color: #e1e4e8
+    border: 0
+
+.credit-body blockquote
+    padding: 0 1em
+    color: #6a737d
+    border-left: .25em solid #dfe2e5
+
+.credit-body blockquote>:first-child
+    margin-top: 0
+
+.credit-body blockquote>:last-child
+    margin-bottom: 0
+
+.credit-body h1,
+.credit-body h2,
+.credit-body h3,
+.credit-body h4,
+.credit-body h5,
+.credit-body h6
+    margin-top: 24px
+    margin-bottom: 16px
+    font-weight: 600
+    line-height: 1.25
+
+.credit-body h1
+    font-size: 1.25em
+
+.credit-body h1,
+.credit-body h2
+    padding-bottom: .3em
+    border-bottom: 1px solid #eaecef
+
+.credit-body h2
+    font-size: 1.1em
+
+.credit-body h3
+    font-size: 1.1em
+
+.credit-body h4
+    font-size: 1em
+
+.credit-body h5
+    font-size: .875em
+
+.credit-body h6
+    font-size: .85em
+    color: #6a737d
+
+.credit-body p
+    font-size: .85em
+
+.credit-body ol,
+.credit-body ul
+    padding-left: 2em
+
+.credit-body ol ol,
+.credit-body ol ul,
+.credit-body ul ol,
+.credit-body ul ul
+    margin-top: 0
+    margin-bottom: 0
+
+.credit-body li
+    word-wrap: break-all
+
+.credit-body li>p
+    margin-top: 16px
+
+.credit-body li+li
+    margin-top: .25em
+
+.credit-body dl
+    padding: 0
+
+.credit-body dl dt
+    padding: 0
+    margin-top: 16px
+    font-size: 1em
+    font-style: italic
+    font-weight: 600
+
+.credit-body dl dd
+    padding: 0 16px
+    margin-bottom: 16px
+
+.credit-body table
+    display: block
+    width: 100%
+    overflow: auto
+
+.credit-body table th
+    font-weight: 600
+
+.credit-body table td,
+.credit-body table th
+    padding: 6px 13px
+    border: 1px solid #dfe2e5
+
+.credit-body table tr
+    background-color: #fff
+    border-top: 1px solid #c6cbd1
+
+.credit-body table tr:nth-child(2n)
+    background-color: #f6f8fa
+
+.credit-body img
+    max-width: 100%
+    box-sizing: initial
+    background-color: #fff
+
+.credit-body img[align=right]
+    padding-left: 20px
+
+.credit-body img[align=left]
+    padding-right: 20px
+
+.credit-body code
+    padding: .2em .4em
+    margin: 0
+    font-size: 85%
+    background-color: rgba(27,31,35,.05)
+    border-radius: 3px
+
+.credit-body pre
+    word-wrap: normal
+
+.credit-body pre>code
+    padding: 0
+    margin: 0
+    font-size: 100%
+    word-break: normal
+    white-space: pre
+    background: transparent
+    border: 0
+
+.credit-body .highlight
+    margin-bottom: 16px
+
+.credit-body .highlight pre
+    margin-bottom: 0
+    word-break: normal
+
+.credit-body .highlight pre,
+.credit-body pre
+    padding: 16px
+    overflow: auto
+    font-size: 85%
+    line-height: 1.45
+    background-color: #f6f8fa
+    border-radius: 3px
+
+.credit-body pre code
+    display: inline
+    max-width: auto
+    padding: 0
+    margin: 0
+    overflow: visible
+    line-height: inherit
+    word-wrap: normal
+    background-color: initial
+    border: 0
+
+.credit-body .commit-tease-sha
+    display: inline-block
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace
+    font-size: 90%
+    color: #444d56
+
+.credit-body .full-commit .btn-outline:not(:disabled):hover
+    color: #005cc5
+    border-color: #005cc5
+
+.credit-body .blob-wrapper
+    overflow-x: auto
+    overflow-y: hidden
+
+.credit-body .blob-wrapper-embedded
+    max-height: 240px
+    overflow-y: auto
+
+.credit-body .blob-num
+    width: 1%
+    min-width: 50px
+    padding-right: 10px
+    padding-left: 10px
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace
+    font-size: 12px
+    line-height: 20px
+    color: rgba(27,31,35,.3)
+    text-align: right
+    white-space: nowrap
+    vertical-align: top
+    cursor: pointer
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+
+.credit-body .blob-num:hover
+    color: rgba(27,31,35,.6)
+
+.credit-body .blob-num:before
+    content: attr(data-line-number)
+
+.credit-body .blob-code
+    position: relative
+    padding-right: 10px
+    padding-left: 10px
+    line-height: 20px
+    vertical-align: top
+
+.credit-body .blob-code-inner
+    overflow: visible
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace
+    font-size: 12px
+    color: #24292e
+    word-wrap: normal
+    white-space: pre
+
+.credit-body .pl-token.active,
+.credit-body .pl-token:hover
+    cursor: pointer
+    background: #ffea7f
+
+.credit-body .tab-size[data-tab-size="1"]
+    -moz-tab-size: 1
+    tab-size: 1
+
+.credit-body .tab-size[data-tab-size="2"]
+    -moz-tab-size: 2
+    tab-size: 2
+
+.credit-body .tab-size[data-tab-size="3"]
+    -moz-tab-size: 3
+    tab-size: 3
+
+.credit-body .tab-size[data-tab-size="4"]
+    -moz-tab-size: 4
+    tab-size: 4
+
+.credit-body .tab-size[data-tab-size="5"]
+    -moz-tab-size: 5
+    tab-size: 5
+
+.credit-body .tab-size[data-tab-size="6"]
+    -moz-tab-size: 6
+    tab-size: 6
+
+.credit-body .tab-size[data-tab-size="7"]
+    -moz-tab-size: 7
+    tab-size: 7
+
+.credit-body .tab-size[data-tab-size="8"]
+    -moz-tab-size: 8
+    tab-size: 8
+
+.credit-body .tab-size[data-tab-size="9"]
+    -moz-tab-size: 9
+    tab-size: 9
+
+.credit-body .tab-size[data-tab-size="10"]
+    -moz-tab-size: 10
+    tab-size: 10
+
+.credit-body .tab-size[data-tab-size="11"]
+    -moz-tab-size: 11
+    tab-size: 11
+
+.credit-body .tab-size[data-tab-size="12"]
+    -moz-tab-size: 12
+    tab-size: 12
+
+.credit-body .task-list-item
+    list-style-type: none
+
+.credit-body .task-list-item+.task-list-item
+    margin-top: 3px
+
+.credit-body .task-list-item input
+    margin: 0 .2em .25em -1.6em
+    vertical-align: middle

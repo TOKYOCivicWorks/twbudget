@@ -3,5 +3,7 @@ _public
 app/assets/*.html
 app/assets/partials/app/*.html
 server/*.js
+twitter_proxy/*.js
 lib/*.js
 *.swp
+.setuprc

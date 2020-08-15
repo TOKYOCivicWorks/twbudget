@@ -9,19 +9,20 @@ html(lang='en',prefix="og: http://ogp.me/ns#")
     base(href="/")
 
     if locals.og_title!=undefined
-      meta(property='og:title',content='g0v.tw : 中央政府總預算 #{locals.og_title}')
+      meta(property='og:title',content='国の予算見える化サイト | TOKYO CivicWorks #{locals.og_title}')
       meta(property='og:type',content='website')
-      meta(property='og:url',content='http://g0v.tw/#{locals.og_url}')
-      meta(property='og:image',content='http://g0v.tw/img/g0v.png')
+      meta(property='og:url',content='http://#{locals.web_host}/#{locals.og_url}')
+      meta(property='og:image',content='http://#{locals.web_host}/img/thumbnail.png')
       meta(property='og:description',content='#{locals.og_description}')
-      title g0v.tw: 中央政府總預算 #{locals.og_title}
+      title 国の予算見える化サイト | TOKYO CivicWorks #{locals.og_title}
     else
-      meta(property='og:title',content='g0v.tw : 中央政府總預算')
+      meta(property='og:title',content='国の予算見える化サイト | TOKYO CivicWorks')
       meta(property='og:type',content='website')
-      meta(property='og:url',content='http://g0v.tw/')
-      meta(property='og:image',content='http://g0v.tw/img/g0v.png')
-      meta(property='og:description',content='零時政府 g0v.tw : 中央政府總預算 Visualization')
-      title g0v.tw: 中央政府總預算
+      meta(property='og:url',content='http://#{locals.web_host}/')
+      meta(property='og:image',content='http://#{locals.web_host}/img/thumbnail.png')
+      meta(property='og:description',content='国の予算見える化サイト | TOKYO CivicWorks')
+      title 国の予算見える化サイト | TOKYO CivicWorks
+
     link(rel='shortcut icon',href='/img/favicon.ico')
     link(rel='stylesheet', href='/css/app.css')
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Cousine:700italic',type='text/css')
@@ -39,37 +40,45 @@ html(lang='en',prefix="og: http://ogp.me/ns#")
     script(src='//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.0.1/angular-ui-router.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js')
     script(src='//cdnjs.cloudflare.com/ajax/libs/d3/3.1.6/d3.min.js')
+    script(src='//use.fontawesome.com/releases/v5.0.6/js/all.js')
     script(src='/js/vendor.js')
     script(src='/js/partials.js')
-    script(src='/js/app.js')
+    script(src='/js/app.js', id="script_app", data-twitter-auth='#{locals.twitter_auth}'
+           data-twitter-proxy-host='#{locals.twitter_proxy_host}',
+           data-twitter-proxy-port='#{locals.twitter_proxy_port}')
 
   body(ng-controller='AppCtrl',ng-cloak)
-    #fb-root
+    #twitter-root
       script
-          (function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/zh_TW/all.js#xfbml=1";
-              fjs.parentNode.insertBefore(js, fjs);
-          }(document, 'script', 'facebook-jssdk'));
+        window.twttr = (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0],
+              t = window.twttr || {};
+          if (d.getElementById(id)) return t;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js, fjs);
+          t._e = [];
+          t.ready = function(f) {
+            t._e.push(f);
+          };
+          return t;
+        }(document, "script", "twitter-wjs"));
     .wrapper
       .navbar.site-heading
         .navbar-inner
           .container
             .brand
-              img(src="/img/logo.png",alt="Logo: G0V.tw")
-              span / 中央政府總預算
+              a(href="javascript: location.assign('.');")
+                img(src="/img/logo.png", alt="TOKYO CivicWorks")
+              span 国の予算見える化サイト
             .nav-collapse
               div(ng-include="'/partials/nav.html'")
       .container.main-content
         div(ui-view)
       div(ng-include="'/partials/login.html'")
       .push
-    script.
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-41326468-1', 'g0v.tw');
+    #access-analysis
+      script(src='//accaii.com/#{locals.access_analysis_id}/script.js', async)
+      noscript
+        img(src='//accaii.com/#{locals.access_analysis_id}/script?guid=on')

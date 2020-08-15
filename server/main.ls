@@ -5,13 +5,18 @@
     CookieStore = require \cookie-sessions
     @use @express.static __dirname + \/../_public
     @use \bodyParser
-    @use CookieStore secret: @config.cookieSecret, onError: ->
+    @use CookieStore secret: @config.cookie_secret, onError: ->
         return {}
     @app.use @passport.initialize!
     @app.use @passport.session!
+    if @config.use_basic_auth
+      @basicauth = require \./basicauth
+      @app.use @basicauth
     @use @app.router
     @app.set("trust proxy", true);
     @app.set("views", "#{__dirname}/../app")
+    encryptlib = require \../lib/encrypt
+    log = @log
 
     RealBin = require \path .dirname do
         require \fs .realpathSync __filename
@@ -46,7 +51,7 @@
     @get '/1/budgetitems/:key': ->
         err, item <~ BudgetItem.findOne {key: @params.key}, 'key nhates nconfuses nlikes ncuts tags'
         .exec
-        console.log @params.key, item
+        log.info @params.key, item
         @response.send item
 
     @post '/1/budgetitems/:key/tags/:tag': ->
@@ -55,7 +60,7 @@
 
         done = (err, item) ~>
             errr, updated <~ item.update $addToSet: tags: tag
-            console.log errr, updated
+            log.info errr, updated
             err, item <~ BudgetItem.findOne 'key': key
             @response.send item
 
@@ -69,15 +74,15 @@
     @post '/1/budgetitems/:key/:what': ->
         key = @params.key
         done = (err, item) ~>
-            console.log item
+            log.info item
             if @params.what in <[likes confuses hates cuts]>
-                console.log item._id
+                log.info item._id
                 user_id = @request.user?_id ? @request.ip
 
                 errr, updated <~ BudgetItem.update {_id: item._id, "#{@params.what}": {$ne: user_id}}, do 
                     $inc: "n#{@params.what}": 1
                     $push: { "#{@params.what}": user_id }
-                console.log errr, updated
+                log.info errr, updated
                 err, item <~ BudgetItem.findOne 'key': key
                 @response.send item
             else
@@ -97,8 +102,19 @@
     @loadCsv \app/assets/data/tw2012ap.csv, (hash) ~> 
       @csv2012 = hash
     getOpenGraph = (code) ~> @getOpenGraph @csv2012,code
-    @get '/:what': sendFile \index.html
+    locals = {}
+    locals[\twitter_auth] = encryptlib.encrypt @config.twitter_auth, @config.twitter_key
+    locals[\twitter_proxy_host] = @config.twitter_proxy_host
+    locals[\twitter_proxy_port] = @config.twitter_proxy_port
+    locals[\web_host] = @config.web_host
+    locals[\access_analysis_id] = @config.access_analysis_id
+
+    @get '/:what': ->
+        #sendFile \index.html
+        @render 'index.static.jade', locals
+
     @get '/budget/:code': ->
         code = (@request.path.match /\/budget\/(\S+)/)[1]
-        @render 'index.static.jade': getOpenGraph code
-      #sendFile \index.html
+        localsForOpenGraph = getOpenGraph code
+        localsWithOpenGraph = Object.assign(locals, localsForOpenGraph)
+        @render 'index.static.jade', localsWithOpenGraph

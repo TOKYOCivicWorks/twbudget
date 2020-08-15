@@ -1,46 +1,19 @@
-ul.nav
-  li(ng-class="getClass('/view2')")
-    a(ng-href='/view2') 每日支出
-  li(ng-class="getClass('/view3')")
-    a(ng-href='/view3') 鳥瞰圖
-  li(ng-class="getClass('/view4')")
-    a(ng-href='/budget') 變化圖
-  li(ng-class="getClass('/debtclock')")
-    a(ng-href='/debtclock') 國債鐘
-  li.dropdown
-    a.dropdown-toggle(id="dLabel",role="button",data-toggle="dropdown",data-target="#")
-      單位換算
-      b.caret
-    ul.dropdown-menu(id="unit-selector",ng-controller="UnitMapper",role="menu",aria-labelledby="dLabel")
-      li(ng-repeat="item in units")
-        a(onclick="UnitMapper.update({{$index}})")
-          {{item[1]}}
-      li.divider
-      li
-        a(onclick="UnitMapper.update(-1)") 隨便來一個
-      li.disabled
-        a(data-toggle="modal",onclick='$("#addunit-value-group").removeClass("error");$("#addunit-modal").modal()') 我要加單位
-    .modal#addunit-modal.fade(role="dialog",tabindex="-1",aria-labelledby="budget-addunit-label",aria-hidden="true")
-      .modal-header
-        button.close(type="button",data-dismiss="modal",aria-hidden="true") x
-        h3#budget-addunit-label 我要加單位
-      .modal-body(style="text-align:center")
-        .input-append
-          span.add-on 一
-          input.input-mini(title="量詞欄位不可空白",ng-model="addunit_quantity",type="text",placeholder="量詞,如:個 或 塊")
-          input.input-medium(title="單位欄位不可空白",ng-model="addunit_unit",type="text",placeholder="單位,如:蘋果 或 金條")
-          span.add-on 等於
-          input.span2(title="價錢欄位需填數字",ng-model="addunit_value",type="text",placeholder="價錢,如:50 或 2000 (全數字)")
-          span.add-on 元
-        #budget-addunit-result
-          預覽: 一{{addunit_quantity}}{{addunit_unit}} 等於 {{addunit_value}} 元
-      .modal-footer
-        button.btn(data-dismiss="modal",aria-hidden="true") 取消
-        button.btn.btn-primary(ng-click="addunit()") 送出
-
 ul.nav.pull-right
-  li(ng-class="getClass('/profile')")
-    a(ng-href='/profile') 我的帳號
-  li
-    a
-      .fb-like(data-send="false",data-href="https://facebook.com/g0v.tw",data-width="120",data-layout="button_count",data-show-faces="false",data-font="verdana")
+  - var text = "%E5%9B%BD%E3%81%AE%E4%BA%88%E7%AE%97%E8%A6%8B%E3%81%88%E3%82%8B%E5%8C%96%E3%82%B5%E3%82%A4%E3%83%88";
+  - var url = "http%3A%2F%2Fbudget.civic-works.tokyo";
+  li.sns-share-list-item
+    a(href="http://www.facebook.com/sharer.php?u=#{url}&amp;t=#{text}",
+      target="_blank")
+      i.sns-share-icon.fab.fa-facebook-f(title="Facebookで共有")
+  li.sns-share-list-item
+    a(href="https://twitter.com/intent/tweet?text=#{text}&url=#{url}&via=TOKYOCivicWorks",
+      target="_blank")
+      i.sns-share-icon.fab.fa-twitter(title="Twitterで共有")
+  li.sns-share-list-item
+    a(href="http://line.naver.jp/R/msg/text/?#{text}#{url}",
+      target="_blank")
+      i.sns-share-icon.fab.fa-line(title="LINEで共有")
+  li.sns-share-list-item
+    a(href="mailto:?subject=#{text}&body=#{url}",
+      target="_blank")
+      i.sns-share-icon.far.fa-envelope(title="メールで共有")

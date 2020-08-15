@@ -1,41 +1,40 @@
 .treemap-root
   .btn-group(data-toggle="buttons-radio")
     a.btn.default.active Default
-    a.btn.bycat 政事別
-    a.btn.bytop 主管單位
-  #bubble-circle-size.btn 圖例
+    a.btn.bycat 経費別
+    a.btn.bytop 所管別
+  #bubble-circle-size.btn 凡例
+  #credit-info.btn About site
   #bubble-info
     #bubble-info-inner
       i#bubble-info-close.icon-big-close(style="margin-top:-5px")
       #bubble-info-left
         #bubble-detail-info
           #bubble-detail-names
-            i.icon-big-info-sign(style="margin-top:-9px")
+            i#BudgetItem.icon-big-info-sign(style="margin-top:-9px")
             span#bubble-detail-name ???
             |(
             span#bubble-detail-depname ???
-            )
+            |)
           #bubble-detail-amount
             span#bubble-detail-amount-value ???
             span#bubble-detail-amount-quantifier
-            span#bubble-detail-amount-unit 元
-            |(
+            span#bubble-detail-amount-unit 円
+            |&nbsp;(
             span#bubble-detail-amount-change ???
-            |&nbsp;)
+            |)
             br
-            |( 即為
-            span#bubble-detail-amount-alt ???
-            |&nbsp;)
             br
             #bubble-detail-amount-link
-              span 連結到此項 :
-              a#bubble-detail-link(href="view4") http://g0v.tw/view4
+              span この項目へのリンク :
+              a#bubble-detail-link(href="view4") ???
         hr
         #bubble-detail-change-bar
         hr
-        include tags
-        hr
-        include vote
+        #bubble-detail-ref-block
+          |(最新年度内訳:&nbsp;
+          span#bubble-detail-ref ???
+          |)
       #bubble-info-right
   #bubble-chart
   script

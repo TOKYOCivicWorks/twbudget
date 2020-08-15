@@ -1,10 +1,32 @@
-{"authproviders": {
-    "facebook": {
-        "client_id": "278354422273748",
-        "secret": "60cd3abadc8135f3eb5d1101b95becef"
+{
+    "base_uri": "http://local.host:8000/",
+    "defaults": {
+        "development": {
+            "WEB_HOST": "localhost",
+            "WEB_PORT": "8000",
+            "TWITTER_PROXY_HOST": "localhost",
+            "TWITTER_PROXY_PORT": "8899",
+            "USE_BASIC_AUTH": true,
+            "ACCESS_ANALYSIS_ID": "jpbudgetdev",
+            "LOG_LEVEL": "DEBUG"
+        },
+        "staging": {
+            "WEB_HOST": "staging.civic-works.tokyo",
+            "WEB_PORT": "80",
+            "TWITTER_PROXY_HOST": "staging.civic-works.tokyo",
+            "TWITTER_PROXY_PORT": "8899",
+            "USE_BASIC_AUTH": true,
+            "ACCESS_ANALYSIS_ID": "jpbudgetstaging",
+            "LOG_LEVEL": "INFO"
+        },
+        "production": {
+            "WEB_HOST": "budget.civic-works.tokyo",
+            "WEB_PORT": "80",
+            "TWITTER_PROXY_HOST": "budget.civic-works.tokyo",
+            "TWITTER_PROXY_PORT": "8899",
+            "USE_BASIC_AUTH": false,
+            "ACCESS_ANALYSIS_ID": "jpbudgetprod",
+            "LOG_LEVEL": "INFO"
+        }
     }
-},
-"base_uri": "http://local.host:8000/"
-
 }
-

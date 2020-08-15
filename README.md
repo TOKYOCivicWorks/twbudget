@@ -1,40 +1,40 @@
-# twbudget
-### visualizing taiwan central government spending
+# Japan National Budget Visualization Web Site
 
-![twbudget](https://raw.github.com/g0v/twbudget/master/thumbnail.png "twbudget")
+URL: [http://budget.civic-works.tokyo](http://budget.civic-works.tokyo)
 
-## Prerequisites
+Web site visualizing Japan's national budget data (originally based on [https://github.com/g0v/twbudget](https://github.com/g0v/twbudget)).
 
+![jpbudget_thumbnail](https://raw.github.com/TOKYOCivicWorks/jpbudget/master/app/assets/img/thumbnail.png "jpbudget")
 
-### Windows 7(32-bit):
+## Setup
 
-1.Install the correct Windows SDK from [here](http://go.microsoft.com/?linkid=7729279) for the Node modules requiring rebuild for installation such as bcrypt.	
+### Install on Linux Ubuntu 18.04
 
-2.Install Visual Studio 2008 Redistributables from [here](http://www.microsoft.com/downloads/details.aspx?familyid=9B2DA534-3E03-4391-8A4D-074B9F2BC1BF) for OpenSLL, which is for bcrypt.	
+	$ ./scripts/install.sh
 
-3.Install OpenSSL from [here](http://slproweb.com/download/Win32OpenSSL-1_0_1e.exe) for bcrypt.	
+### Prepare scripts/.setuprc
 
-4.Same as below except "brew" is not available on Windows so please install below modules separately.
-	
-### Mac OS X and [Homebrew](http://mxcl.github.io/homebrew/):
+	export TWITTER_BEARER_TOKEN="AAAAAA..."  # Please obtain bearer token using Twitter API
+	export TWITTER_AUTH_ENCRYPT_KEY="YOUR_OWN_KEY_ANY_WORD_IS_OK"
 
-	$ brew install node        # Install nodejs and npm
-	$ brew install brew-gem    # Install sass
-	$ gem install sass
-	$ brew install mongodb     # Install mongodb
-	$ mongod                   # Run mongodb in foreground
+## Run
 
-## build
+### On your local host during development
 
-* `npm i` to install node packages
+	$ ./scripts/start-all.sh -l
 
-### Running the app during development
+Then navigate your browser to http://(*LOCAL_HOST_IP*):8000, typing *testuser* & *jpbudget2020*.
 
-* `brunch w &`
-* `make run`
+### On external host for public (i.e. budget.civic-works.tokyo)
 
-Then navigate your browser to [http://localhost:8000](http://localhost:8000)
+	$ ./scripts/start-all.sh -p
+
+## How to Contribute
+
+[How to contribute](https://raw.github.com/TOKYOCivicWorks/jpbudget/master/HOW_TO_CONTRIBUTE.md)
 
 ## License
 
-MIT http://g0v.mit-license.org/
+[The MIT License](https://raw.github.com/TOKYOCivicWorks/jpbudget/master/LICENSE)
+
+([Licenses for 3rd party software](https://raw.github.com/TOKYOCivicWorks/jpbudget/master/LICENSE_3RD_PARTY))

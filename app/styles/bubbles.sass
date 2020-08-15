@@ -15,7 +15,7 @@ text
 #bubble-circle-size
     position: absolute
     top: 0px
-    left: 560px
+    left: 720px
 
 #bubble-info-close
     position: absolute
@@ -28,7 +28,7 @@ text
     top: 55px
     left: 5px
     width: 360px
-    height: 535px
+    height: 600px
     z-index: -1
     background: #eee
     box-shadow: 0px 0px 5px
@@ -45,12 +45,13 @@ text
     float: left
 
 #bubble-info-right
-    width: 360px
+    width: 500px
     float: left
     margin-left: 40px
 
 #bubble-detail-info
-    height: 115px
+    height: 139px
+    margin: 0px 10px 0px 0px
 .bubbletext
     font-size: 13px
 
@@ -69,17 +70,26 @@ text
     font-size: 24px
 
 #bubble-detail-names
-    height: 36px
+    height: 60px
     width: 330px
-    line-height: 11px
+    line-height: 20px
+    display: inline
+
+#bubble-detail-names::after
+    content: "\A"
+    white-space: pre
 
 #bubble-detail-name
     font-size: 19px
 
 #bubble-detail-change-bar,#bubble-detail-change-bar2
-    height: 144px
+    height: 244px
     rect
         fill: steelblue
+
+#bubble-detail-ref-block
+    height: 80px
+    width: 340px
 
 #bubble-detail-amount-link
     text-align: right

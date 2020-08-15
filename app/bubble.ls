@@ -10,7 +10,9 @@ class BubbleChart
     @mode = 'default'
     @nodes = []
     @change_scale = d3.scale.linear!domain([-0.25, 0.25])clamp(true)range [@height / 9 * 5, @height / 9 * 4]
-    @fill_color = d3.scale.quantile!domain([ -0.5 -0.25 -0.1 -0.02 0 0.02 0.1 0.25 0.5 ]).range <[ #C51B7D #DE77AE #F1B6DA #FDE0EF #E6F5D0 #B8E186 #7FBC41 #4D9221 ]>
+    @fill_color = -> if isNaN it then \#FFFDA5 else @fill_color_scale it
+    @fill_color_scale = d3.scale.quantile!domain([ -0.5 -0.25 -0.1 -0.02 0 0.02 0.1 0.25 0.5 ])
+      .range <[ #C51B7D #DE77AE #F1B6DA #FDE0EF #E6F5D0 #B8E186 #7FBC41 #4D9221 ]>
     @radius_scale = d3.scale.pow!exponent 0.5
       .domain [0, d3.max @data, (d) ~> +d[@amount_attr]]
       .range [2, 65]
@@ -38,25 +40,25 @@ class BubbleChart
     @circles = @vis.selectAll("circle.budget")
       .data(@nodes, -> it.id)
 
-    colors = [-1] ++ @fill_color.quantiles! ++ [NaN]
-    x = d3.scale.ordinal!rangeRoundBands([200, 0], 0.1)domain colors
+    colors = [-1] ++ @fill_color_scale.quantiles! ++ [NaN]
+    x = d3.scale.ordinal!rangeRoundBands([200, 0], 0.0)domain colors
     y = d3.scale.ordinal!rangeRoundBands([200, 0], 0.1)domain colors
     change = d3.format \+%
-    @vis.selectAll(\.change-lenged)data colors
+    @vis.selectAll(\.change-legend)data colors
         ..enter!append \rect
             .attr \class \change-legend
-            .attr \x -> 260 + (x it)*1.5
+            .attr \x -> 410 + (x it)*1.5 - 5
             .attr \y 20
-            .attr \width -> x.rangeBand!
-            .attr \height -> 10
+            .attr \width -> x.rangeBand!*1.5
+            .attr \height -> 18
             .attr \fill ~> @fill_color it
             .attr \stroke \none
         ..enter!append \text
-            .attr \x -> 246 + (if isNaN it => x.rangeBand!/2 else x.rangeBand!) + (x it)*1.55
+            .attr \x -> 396 + (if isNaN it => x.rangeBand!/2 else x.rangeBand!) + (x it)*1.55
             .attr \y 15
             .attr \text-anchor \right
             .text -> match it
-            | isNaN     => '新增'
+            | isNaN     => '新規'
             | (== -1)   => ''       # XXX: match -1 does not work
             | otherwise => change it
     @locking = (d,i,node) ~>
@@ -73,13 +75,46 @@ class BubbleChart
           ..node = null
         return
       InfoPanel.setState 3
+      d3.selectAll '#twitter-search div iframe' .remove!
+      d3.selectAll '#twitter-search *' .remove!
       d3.select '#bubble-info-right *' .remove!
-      d3.select \#bubble-info-right .insert \fb:comments, \:first-child
-        .attr \href, \http://budget.g0v.tw/budget/ + d.id
-        .attr \num-posts, \2
-        .attr \width, \470
-        .attr \class, \fb-comments
-      FB.XFBML.parse(document.getElementById("bubble-info-right"))
+      d3.select \#bubble-info-right .insert \div, \:first-child
+        .attr('id', 'twitter-search')
+      query = d.data.name
+      query = query.replace(/\(/g, ' OR ').replace(/\)/g, '')
+      query = query + " lang:ja -is:retweet"
+      queryEncoded = encodeURI query
+      host = $('#script_app').attr('data-twitter-proxy-host')
+      port = $('#script_app').attr('data-twitter-proxy-port')
+      url = 'http://' + host + ':' + port + '/api/search?query=' + queryEncoded + '&max_results=10'
+      log.debug("url: " + url)
+      log.debug("query (before encode): \"" + query + "\"")
+      $.ajax {
+          type: "GET",
+          url: url,
+          dataType: "json",
+          headers: {
+              'Authorization' : "Bearer " + $('#script_app').attr('data-twitter-auth')
+          },
+          cache: false,
+      } .done (json) ->
+        log.debug("json.meta.result_count: " + json.meta.result_count)
+        parentElement = document.getElementById 'twitter-search'
+        if json.meta.result_count > 0
+            style = parentElement.getAttribute('style') or ''
+            style = style + 'transform: scale(0.8); transform-origin: top center; '
+            style = style + 'opacity: 1.0; overflow-y: scroll; height: 700px;'
+            parentElement.setAttribute('style', style)
+            for res in json.data.slice(0, 5)
+              twttr.widgets.createTweet(res.id, parentElement,
+                                        { align: 'left', conversation: 'none', width: 500, lang: 'ja' })
+                  .then (tweetElement) ->
+                      style = tweetElement.getAttribute('style') or ''
+                      style = style.replace(/margin-top: .*px/, 'margin-top: 0px')
+                      style = style.replace(/margin-bottom: .*px/, 'margin-bottom: 0px')
+                      style = style.replace(/margin: .*px/, 'margin: 0px')
+                      style = style + 'opacity: 1.0;'
+                      tweetElement.setAttribute('style', style)
 
       @lockcell
         ..id = d.id
@@ -115,36 +150,50 @@ class BubbleChart
     @depict = @vis.append \g
           .style \opacity 0.0
           .style \display \none
-          .attr \transform "translate(430,150)"
+          .attr \transform "translate(430,100)"
     @depict.append \rect
           .attr \width 550
           .attr \height 350
           .attr \rx 10
           .attr \ry 10
           .attr \fill \#222
-    for val, i in ([100, 10000, 100000, 284400].map -> it * 1000 * 1000)
+    for val, i in ([100, 100000, 1000000, 10000000].map -> it * 1000 * 1000)
         r = @radius_scale val
         @depict.append \circle
           .attr \r r
           .attr \cx 275 - r
-          .attr \cy 310 - 2 * r
+          .attr \cy 310 - (3 * r + 50)
           .attr \fill \none
           .attr \stroke-width 2
           .attr \stroke \#fff
-            ..attr \stroke-dasharray, '5, 1, 5' if i == 3
         @depict.append \text
           .attr \x 285
-          .attr \y 315 - 2 * r
+          .attr \y 315 - (3 * r + 50)
           .attr \text-anchor \bottom
           .attr \text-anchor \left
           .attr \fill \#fff
-          .text CurrencyConvert(val) + (if i == 3 => '(2013預計舉債)' else '')
+          .text CurrencyConvert(val)
     d3.select('#bubble-circle-size').on \mouseover (d,i) ~>
-      @depict.transition().duration(750).style \opacity 0.7
+      @depict.transition().duration(750).style \opacity 0.8
       .style \display \block
     .on \mouseout (d,i) ~>
       @depict.transition().duration(750).style \opacity 0.0
       @depict.transition().delay(750).style \display \none
+
+    @credit = d3.select(\#credit-info)append \div
+      .style \opacity 0.0
+      .style \display \none
+      .attr \class 'credit-body'
+
+    $ \.credit-body .load \../credit.html
+
+    d3.select('#credit-info').on \mouseover (d,i) ~>
+      @credit.transition().duration(750).style \opacity 0.97
+      .style \display \block
+    .on \mouseout (d,i) ~>
+      @credit.transition().duration(750).style \opacity 0.0
+      @credit.transition().delay(750).style \display \none
+
   charge: (d) ~>
     return
      if d.id==@lockcell.id then -Math.pow d.radius>?20, 2
@@ -188,11 +237,15 @@ class BubbleChart
     @mode = attr
     InfoPanel.setState 2
     nest = d3.nest!key -> it[attr]
+    log.debug("display_by_attr data.length: " @data.length)
     entries = nest.entries @data
     amount_attr = @amount_attr
     sums = nest.rollup -> it.map (.[amount_attr]) .map(-> +it).reduce (+)
         .entries @data
         .sort (a, b) -> (b.values - a.values)
+    log.debug("attr: " attr)
+    log.debug("sums: " + sums.map -> it.values)
+    log.debug("entries: " + entries.map -> it["values"][0][attr] + it["values"].length)
     curr_x = 50
     curr_y = 100
     y_offset = null
@@ -310,11 +363,12 @@ class BubbleChart
     value = d3.format \,
     change = d3.format \+.2%
     if element then (d3.select element).attr 'stroke', 'black'
-    content = "<span class='name'>Title:</span><span class='value'> #{data.data.name} / #{data.id} </span><br/>"
-    content += "<span class='name'>Amount:</span><span class='value'> $#{value data.value}</span><br/>"
+    content = "<span class='name'>Title:</span><span class='value'> #{data.data.name} </span><br/>"
+    content += "<span class='name'>Amount:</span><span class='value'> JPY#{value data.value}</span><br/>"
     content += "<span class='name'>Dep:</span><span class='value'> #{data.data.depname}/ #{data.data.depcat} </span><br/>"
     content += "<span class='name'>change:</span><span class='change'> #{change data.change}</span>"
     content += "<div id='bubble-detail-change-bar2'></div>"
+    content += "<span class='name'>note:</span><span class='note'> #{data.data.ref}</span>"
     $('#bubble-detail-name').text(data.data.name)
     $('#bubble-detail-depname').text(data.data.depname+'/'+data.data.depcat)
     $('#bubble-detail-amount-value').text(UnitMapper.convert data.value,void,false)
@@ -322,8 +376,10 @@ class BubbleChart
     $('#bubble-detail-amount-unit').text(UnitMapper.getUnit!)
     $('#bubble-detail-amount-change').text(change data.change)
     $('#bubble-detail-amount-alt').text UnitMapper.convert data.value,-1,true
-    $('#bubble-detail-link').attr \href, 'http://budget.g0v.tw/budget/'+data.data.code
-    $('#bubble-detail-link').text 'http://budget.g0v.tw/budget/'+data.data.code
+    $('#bubble-detail-ref').attr \title, data.data.ref
+    $('#bubble-detail-ref').text if data.data.ref.length > 100 => (data.data.ref).slice(0, 100)+'…' else data.data.ref
+    $('#bubble-detail-link').attr \href, './budget/'+data.data.code
+    $('#bubble-detail-link').text 'budget/'+data.data.code
     @tooltip.showTooltip content, d3.event if @mode!='default'
     @do_show_details data,(if element then @mode else 'default') if @do_show_details
     if !element then @tooltip.hideTooltip!
